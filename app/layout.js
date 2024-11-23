@@ -35,7 +35,6 @@ export default function RootLayout({ children }) {
             <main className="min-h-screen">{children}</main>
             <footer className="bg-gray-900 py-12">
               <div className="container mx-auto px-14 text-center text-gray-200"></div>
-              <p>Made with jayesh malviya</p>
             </footer>
           </ThemeProvider>
         </body>
