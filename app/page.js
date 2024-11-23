@@ -9,7 +9,7 @@ export default function Home() {
         <h1 className="text-6xl sm:text-7xl lg:text-8xl font-extrabold gradient-title pb-6 flex flex-col">
           Streamline your workflow <br />
           <span>
-            with{""}
+            with{" "}
             <Image
               src={"/logo2.png"}
               alt="logo image"
