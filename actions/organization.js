@@ -1,6 +1,6 @@
 "use server";
 
-import { db } from "@/lib/prisma";
+import { db } from "../lib/prisma";
 import { auth, clerkClient } from "@clerk/nextjs/server";
 
 export async function getOrganization(slug) {
@@ -18,8 +18,8 @@ export async function getOrganization(slug) {
   }
 
   // Get the organization details
-  const organization = await clerkClient().organizations?.getOrganization({ slug: slug })
-
+  const organization = await (await clerkClient()).organizations.getOrganization({slug})
+console.log(organization,"this_is")
 
   if (!organization) {
     return null;
@@ -27,7 +27,7 @@ export async function getOrganization(slug) {
 
   // Check if user belongs to this organization
   const { data: membership } =
-    await clerkClient().organizations.getOrganizationMembershipList({
+  await (await clerkClient()).organizations.getOrganizationMembershipList({
       organizationId: organization.id,
     });
 
@@ -44,7 +44,7 @@ export async function getOrganization(slug) {
 }
 
 export async function getProjects(orgId) {
-  const { userId } = auth();
+  const { userId } = await auth();
   if (!userId) {
     throw new Error("Unauthorized");
   }
@@ -66,7 +66,7 @@ export async function getProjects(orgId) {
 }
 
 export async function getUserIssues(userId) {
-  const { orgId } = auth();
+  const { orgId } = await auth();
 
   if (!userId || !orgId) {
     throw new Error("No user id or organization id found");
@@ -99,7 +99,7 @@ export async function getUserIssues(userId) {
 }
 
 export async function getOrganizationUsers(orgId) {
-  const { userId } = auth();
+  const { userId } = await auth();
   if (!userId) {
     throw new Error("Unauthorized");
   }
@@ -113,7 +113,7 @@ export async function getOrganizationUsers(orgId) {
   }
 
   const organizationMemberships =
-    await clerkClient().organizations.getOrganizationMembershipList({
+    await (await clerkClient()).organizations.getOrganizationMembershipList({
       organizationId: orgId,
     });
 

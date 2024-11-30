@@ -1,14 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { Badge } from "@/components/ui/badge";
+import { Badge } from "../components/ui/badge";
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from "../components/ui/card";
 import { formatDistanceToNow } from "date-fns";
 import IssueDetailsDialog from "./issue-details-dialog";
 import UserAvatar from "./user-avatar";

@@ -5,7 +5,7 @@ import React from "react";
 import { Button } from "./ui/button";
 import { PenBox } from "lucide-react";
 import UserMenu from "./user-menu";
-import { checkUser } from "@/lib/checkUser";
+import { checkUser } from "../lib/checkUser";
 import UserLoading from "./user-loading";
 
 const Header = async () => {

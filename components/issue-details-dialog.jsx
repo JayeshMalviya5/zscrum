@@ -6,11 +6,11 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
+} from "../components/ui/dialog";
+import { Button } from "../components/ui/button";
 import MDEditor from "@uiw/react-md-editor";
 import UserAvatar from "./user-avatar";
-import useFetch from "@/hooks/use-fetch";
+import useFetch from "../hooks/use-fetch";
 import { useOrganization, useUser } from "@clerk/nextjs";
 import {
   Select,
@@ -18,13 +18,13 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "../components/ui/select";
 import { BarLoader } from "react-spinners";
 import { ExternalLink } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 
-import statuses from "@/data/status";
-import { deleteIssue, updateIssue } from "@/actions/issues";
+import statuses from "../data/status";
+import { deleteIssue, updateIssue } from "../actions/issues";
 
 const priorityOptions = ["LOW", "MEDIUM", "HIGH", "URGENT"];
 

@@ -1,6 +1,6 @@
-import Header from "@/components/header";
+import Header from "../components/header";
 import "./globals.css";
-import { ThemeProvider } from "@/components/theme-provider";
+import { ThemeProvider } from "../components/theme-provider";
 import { Inter } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import{shadesOfPurple} from '@clerk/themes'
