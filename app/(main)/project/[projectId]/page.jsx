@@ -6,7 +6,6 @@ import SprintBoard from "../_components/sprint-board";
 export default async function ProjectPage({ params }) {
   const { projectId } = params;
   const project = await getProject(projectId);
-  console.log(project,"this_is_projrcy")
 
   if (!project) {
     notFound();

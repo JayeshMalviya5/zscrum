@@ -1,5 +1,4 @@
-import { RedirectToSignIn } from "@clerk/nextjs";
-import { clerkMiddleware, createRouteMatcher, redirectToSignIn } from "@clerk/nextjs/server";
+import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 
 const isProtectedRoute = createRouteMatcher([
@@ -7,28 +6,30 @@ const isProtectedRoute = createRouteMatcher([
   "/organisation(.*)",
   "/project(.*)",
   "/issue(.*)",
+  "/sprint(.*)",
 ]);
 
 export default clerkMiddleware(async (auth, req) => {
-  const { userId } = await auth();
-
-  // If the user is not authenticated and the route is protected
-  if (!userId && isProtectedRoute(req)) {
-    return RedirectToSignIn(); // Redirect to sign-in with "/" as the return URL
+  let authantication = await auth();
+  if (!authantication.userId && isProtectedRoute(req)) {
+    return authantication.redirectToSignIn();
   }
 
-  if(auth().userId && !auth().orgId && req.nextUrl.pathname !== " /onboarding" && req.nextUrl.pathname !== "/"){
-    return NextResponse.redirect(new URL("/onboarding",req.url))
+  if (
+    authantication.userId &&
+    !authantication.orgId &&
+    req.nextUrl.pathname !== "/onboarding" &&
+    req.nextUrl.pathname !== "/"
+  ) {
+    return NextResponse.redirect(new URL("/onboarding", req.url));
   }
-
-  return; // Always return to avoid unnecessary loops
 });
 
 export const config = {
   matcher: [
-    // Skip Next.js internals and static files
+    // Skip Next.js internals and all static files, unless found in search params
     "/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)",
-    // Include API routes for authentication checks
+    // Always run for API routes
     "/(api|trpc)(.*)",
   ],
 };
