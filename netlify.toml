@@ -1,2 +1,6 @@
 [build]
-command = "npm install --include=dev && npm run build"
+command = "npm install --include=dev && npx prisma generate && npm run build"
+publish = "out"
+
+[[plugins]]
+package = "@netlify/plugin-nextjs"
